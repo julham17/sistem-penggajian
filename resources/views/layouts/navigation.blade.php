@@ -3,43 +3,67 @@
         <a class="navbar-brand fw-bold" href="{{ route('dashboard') }}">
             Sistem Penggajian
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                        Dashboard
-                    </a>
-                </li>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <!-- Left Side: Menu -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                @auth
+                    @if (Auth::user()->role === 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('karyawan.*') ? 'active fw-semibold' : '' }}"
+                                href="#">Kelola Karyawan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('gaji.*') ? 'active fw-semibold' : '' }}"
+                                href="#">Kelola Gaji</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('cuti.index') ? 'active fw-semibold' : '' }}"
+                                href="#">Pengajuan Cuti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('laporan') ? 'active fw-semibold' : '' }}"
+                                href="#">Laporan</a>
+                        </li>
+                    @elseif (Auth::user()->role === 'karyawan')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('gaji.saya') ? 'active fw-semibold' : '' }}"
+                                href="#">Slip Gaji</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('cuti.ajukan') ? 'active fw-semibold' : '' }}"
+                                href="#">Ajukan Cuti</a>
+                        </li>
+                    @endif
+                @endauth
             </ul>
 
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
+            <!-- Right Side: Auth Menu -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 @auth
-                    <!-- Dropdown -->
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                        <a class="nav-link dropdown-toggle text-capitalize" href="#" id="userDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->username }}
                         </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                Profil
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Keluar
-                            </a>
-                        </div>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profil</a></li>
+                            <li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit">Keluar</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
                 @endauth
             </ul>

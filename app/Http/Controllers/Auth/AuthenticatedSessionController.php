@@ -22,19 +22,31 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        // Otentikasi pakai username & password
-        if (!Auth::attempt($request->only('username', 'password'), $request->boolean('remember'))) {
-            return back()->withErrors([
-                'username' => 'Username atau password salah.',
-            ])->onlyInput('username');
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            $request->session()->regenerate();
+
+            $role = Auth::user()->role;
+            if ($role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($role === 'karyawan') {
+                return redirect()->route('karyawan.dashboard');
+            }
+
+            // Jika role tidak dikenali
+            Auth::logout();
+            return redirect()->route('login')->withErrors(['username' => 'Role tidak dikenali']);
         }
 
-        $request->session()->regenerate();
-
-        // Redirect ke dashboard utama (akan diarahkan lagi sesuai role)
-        return redirect()->intended('/dashboard');
+        return back()->withErrors([
+            'username' => 'Login gagal, cek kembali username dan password',
+        ]);
     }
 
     public function destroy(Request $request): RedirectResponse
