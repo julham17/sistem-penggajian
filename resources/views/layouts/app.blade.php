@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name', 'Sistem Penggajian') }}</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Bootstrap 5.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        
-        {{-- Navigation --}}
-        @include('layouts.navigation')
+<body>
+    {{-- Navigation --}}
+    @include('layouts.navigation')
 
-        {{-- Header --}}
-        @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endisset
+    {{-- Header --}}
+    @isset($header)
+        <header class="bg-white border-bottom shadow-sm mb-3">
+            <div class="container py-3">
+                {{ $header }}
+            </div>
+        </header>
+    @endisset
 
-        {{-- Content --}}
-        <main>
+    {{-- Content --}}
+    <main class="py-4">
+        <div class="container">
             @yield('content')
-        </main>
-    </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -16,7 +16,7 @@
                     @if (Auth::user()->role === 'admin')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('karyawan.*') ? 'active fw-semibold' : '' }}"
-                                href="#">Kelola Karyawan</a>
+                                href="{{ route('karyawan.index') }}">Kelola Karyawan</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('gaji.*') ? 'active fw-semibold' : '' }}"

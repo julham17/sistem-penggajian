@@ -17,25 +17,9 @@ class UserSeeder extends Seeder
         User::insert([
             [
                 'email' => 'admin@admin.com' ,
-                'username' => 'adminuser',
+                'username' => 'admin',
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'email' => 'karyawan1@karyawan.com',
-                'username' => 'karyawan1',
-                'password' => Hash::make('karyawan123'),
-                'role' => 'karyawan',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'email' => 'karyawan2@karyawan.com',
-                'username' => 'karyawan2',
-                'password' => Hash::make('karyawan456'),
-                'role' => 'karyawan',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
