@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Karyawan;
-use Illuminate\Support\Str;
 use App\Models\User;
 
 class KaryawanController extends Controller
@@ -98,7 +97,7 @@ class KaryawanController extends Controller
             'tanggal_masuk' => $request->tanggal_masuk,
         ]);
 
-        return redirect()->route('admin.karyawan.index')->with('success', 'Data karyawan berhasil diperbarui.');
+        return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -107,6 +106,6 @@ class KaryawanController extends Controller
         $karyawan->user->delete(); // Hapus user terkait
         $karyawan->delete();
 
-        return redirect()->route('admin.karyawan.index')->with('success', 'Data karyawan berhasil dihapus.');
+        return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil dihapus.');
     }
 }

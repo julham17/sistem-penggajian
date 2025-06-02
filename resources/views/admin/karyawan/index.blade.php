@@ -20,6 +20,7 @@
                     <th>Nama Lengkap</th>
                     <th>Jabatan</th>
                     <th>Divisi</th>
+                    <th>Nomor Telepon</th>
                     <th>Tanggal Masuk</th>
                     <th>Aksi</th>
                 </tr>
@@ -32,6 +33,7 @@
                         <td>{{ $item->nama_lengkap }}</td>
                         <td>{{ $item->jabatan }}</td>
                         <td>{{ $item->divisi }}</td>
+                        <td>{{ $item->nomor_telepon }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->tanggal_masuk)->format('d-m-Y') }}</td>
                         <td>
                             <a href="{{ route('karyawan.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
