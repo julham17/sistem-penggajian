@@ -10,6 +10,11 @@ class Cuti extends Model
     use HasFactory;
     protected $table = 'cuti';
 
+    protected $casts = [
+        'tanggal_mulai' => 'date',
+        'tanggal_selesai' => 'date',
+    ];
+    
     public function karyawan()
     {
         return $this->belongsTo(Karyawan::class);

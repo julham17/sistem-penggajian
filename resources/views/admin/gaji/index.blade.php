@@ -10,6 +10,23 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    <form method="GET" action="{{ route('gaji.index') }}" class="mb-3 row g-3 align-items-center">
+        <div class="col-auto">
+            <label for="status_kelola" class="col-form-label">Filter Status:</label>
+        </div>
+        <div class="col-auto">
+            <select name="status_kelola" id="status_kelola" class="form-select">
+                <option value="">Semua</option>
+                <option value="belum_dibayar" {{ request('status_kelola') == 'belum_dibayar' ? 'selected' : '' }}>Belum Dibayar</option>
+                <option value="sudah_dibayar" {{ request('status_kelola') == 'sudah_dibayar' ? 'selected' : '' }}>Sudah Dibayar</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Terapkan</button>
+        </div>
+    </form>
+
+
     <table class="table table-bordered">
         <thead class="table-light">
             <tr>
@@ -20,6 +37,7 @@
                 <th>Tunjangan</th>
                 <th>Potongan Cuti</th>
                 <th>Total Bersih</th>
+                <th>Status</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -33,6 +51,13 @@
                     <td>Rp{{ number_format($row->tunjangan) }}</td>
                     <td>Rp{{ number_format($row->potongan_cuti, 0, ',', '.') }}</td>
                     <td><strong>Rp{{ number_format($row->total_bersih, 0, ',', '.') }}</strong></td>
+                    <td>
+                        @if($row->status_kelola === 'sudah_dibayar')
+                            <span class="badge bg-success">Sudah Dibayar</span>
+                        @else
+                            <span class="badge bg-warning text-dark">Belum Dibayar</span>
+                        @endif
+                    </td>
                     <td>
                         <a href="{{ route('gaji.edit', $row->id) }}" class="btn btn-sm btn-warning">Edit</a>
 

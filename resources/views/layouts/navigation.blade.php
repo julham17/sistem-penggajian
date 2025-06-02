@@ -23,6 +23,10 @@
                                 href="{{ route('gaji.index') }}">Kelola Gaji</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('pembayaran.*') ? 'active fw-semibold' : '' }}"
+                                href="{{ route('pembayaran.index') }}">Pembayaran Gaji</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('cuti.index') ? 'active fw-semibold' : '' }}"
                                 href="#">Pengajuan Cuti</a>
                         </li>
@@ -37,7 +41,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('cuti.ajukan') ? 'active fw-semibold' : '' }}"
-                                href="#">Ajukan Cuti</a>
+                                href="{{ route('cuti.ajukan') }}">Ajukan Cuti</a>
                         </li>
                     @endif
                 @endauth

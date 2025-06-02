@@ -6,6 +6,7 @@ use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\KaryawanController;
 use App\Http\Controllers\Admin\GajiController;
+use App\Http\Controllers\Admin\PembayaranGajiController;
 use App\Http\Controllers\Karyawan\GajiKaryawanController;
 
 Route::get('/', function () {
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('gaji', GajiController::class);
         Route::resource('karyawan', KaryawanController::class);
+        Route::resource('pembayaran', PembayaranGajiController::class);
     });
 
     Route::middleware([RoleMiddleware::class . ':karyawan'])->group(function () {
@@ -32,8 +34,11 @@ Route::middleware('auth')->group(function () {
             return view('karyawan.dashboard');
         })->name('karyawan.dashboard');
 
-        Route::get('/gaji', [GajiKaryawanController::class, 'index'])->name('karyawan.gaji.index');
+        Route::get('/cuti/ajukan', function () {
+            return 'Halaman Ajukan Cuti (coming soon)';
+        })->name('cuti.ajukan');
 
+        Route::get('/gaji', [GajiKaryawanController::class, 'index'])->name('karyawan.gaji.index');
 
     });
 

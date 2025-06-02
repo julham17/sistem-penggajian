@@ -18,6 +18,7 @@ class Gaji extends Model
         'gaji_pokok',
         'tunjangan',
         'potongan_cuti',
+        'status_kelola',
     ];
 
     protected $casts = [
@@ -27,6 +28,11 @@ class Gaji extends Model
     public function karyawan()
     {
         return $this->belongsTo(Karyawan::class);
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasOne(PembayaranGaji::class);
     }
 
     // Accessor: total_bersih otomatis

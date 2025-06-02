@@ -11,9 +11,16 @@ use Illuminate\Support\Facades\Log;
 
 class GajiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $gaji = Gaji::with('karyawan')->latest()->paginate(10);
+        $query = Gaji::with('karyawan')->latest();
+
+        if ($request->has('status_kelola') && $request->status_kelola != '') {
+            $query->where('status_kelola', $request->status_kelola);
+        }
+
+        $gaji = $query->paginate(10);
+
         return view('admin.gaji.index', compact('gaji'));
     }
 
@@ -53,6 +60,11 @@ class GajiController extends Controller
             });
 
             $potongan_cuti = $jumlahHariCuti * 100000;
+            
+            Log::info('Jumlah hari cuti disetujui:', ['jumlah_hari_cuti' => $jumlahHariCuti]);
+            Log::info('Potongan cuti:', ['potongan' => $potongan_cuti]);
+            
+            
         } catch (\Exception $e) {
             Log::error('Gagal parsing bulan: ' . $e->getMessage());
         }
