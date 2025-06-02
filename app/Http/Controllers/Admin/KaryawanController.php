@@ -9,7 +9,6 @@ use App\Models\User;
 
 class KaryawanController extends Controller
 {
-    
     public function index()
     {
         $karyawan = Karyawan::with('user')->paginate(10);

@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\KaryawanController;
+use App\Http\Controllers\Admin\GajiController;
 
 Route::get('/', function () {
     return view('auth/login');
@@ -21,11 +22,7 @@ Route::middleware('auth')->group(function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');
 
-        Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
-        Route::get('/admin/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
-        Route::post('/admin/karyawan', [KaryawanController::class, 'store'])->name('karyawan.store');
-
-
+        Route::resource('gaji', GajiController::class);
         Route::resource('karyawan', KaryawanController::class);
     });
 

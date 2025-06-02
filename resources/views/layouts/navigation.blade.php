@@ -20,7 +20,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('gaji.*') ? 'active fw-semibold' : '' }}"
-                                href="#">Kelola Gaji</a>
+                                href="{{ route('gaji.index') }}">Kelola Gaji</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('cuti.index') ? 'active fw-semibold' : '' }}"
