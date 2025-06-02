@@ -6,6 +6,7 @@ use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\KaryawanController;
 use App\Http\Controllers\Admin\GajiController;
+use App\Http\Controllers\Karyawan\GajiKaryawanController;
 
 Route::get('/', function () {
     return view('auth/login');
@@ -30,6 +31,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/karyawan/dashboard', function () {
             return view('karyawan.dashboard');
         })->name('karyawan.dashboard');
+
+        Route::get('/gaji', [GajiKaryawanController::class, 'index'])->name('karyawan.gaji.index');
+
+
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -32,8 +32,8 @@
                         </li>
                     @elseif (Auth::user()->role === 'karyawan')
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('gaji.saya') ? 'active fw-semibold' : '' }}"
-                                href="#">Slip Gaji</a>
+                            <a class="nav-link {{ request()->routeIs('karyawan.gaji.index') ? 'active fw-semibold' : '' }}"
+                                href="{{ route('karyawan.gaji.index') }}">Slip Gaji</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('cuti.ajukan') ? 'active fw-semibold' : '' }}"
