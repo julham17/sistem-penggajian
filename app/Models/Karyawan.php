@@ -26,4 +26,14 @@ class Karyawan extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function gaji()
+    {
+        return $this->hasMany(Gaji::class);
+    }
+
+    public function cuti()
+    {
+        return $this->hasMany(Cuti::class);
+    }
 }

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gaji', function (Blueprint $table) {
+        Schema::create('cuti', function (Blueprint $table) {
             $table->id();
             $table->foreignId('karyawan_id')->constrained('karyawan')->onDelete('cascade');
-            $table->string('bulan'); // format: Juni 2025
-            $table->integer('gaji_pokok');
-            $table->integer('tunjangan')->default(0);
-            $table->integer('potongan_cuti')->default(0);
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_selesai');
+            $table->string('alasan');
+            $table->enum('status', ['pending', 'disetujui', 'ditolak'])->default('pending');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gaji');
+        Schema::dropIfExists('cuti');
     }
 };

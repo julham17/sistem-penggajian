@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 
 class Gaji extends Model
 {
@@ -19,14 +20,27 @@ class Gaji extends Model
         'potongan_cuti',
     ];
 
+    protected $casts = [
+        'bulan' => 'date',
+    ];
+
     public function karyawan()
     {
         return $this->belongsTo(Karyawan::class);
     }
-    
+
     // Accessor: total_bersih otomatis
     public function getTotalBersihAttribute()
     {
         return $this->gaji_pokok + $this->tunjangan - $this->potongan_cuti;
+    }
+
+    public function getBulanFormatAttribute()
+    {
+        try {
+            return $this->bulan->translatedFormat('F Y');
+        } catch (\Exception $e) {
+            return $this->bulan;
+        }
     }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Gaji;
 use App\Models\Karyawan;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class GajiController extends Controller
 {
@@ -25,18 +27,50 @@ class GajiController extends Controller
     {
         $request->validate([
             'karyawan_id' => 'required|exists:karyawan,id',
-            'bulan' => 'required|string',
+            'bulan' => 'required|date_format:Y-m',
             'gaji_pokok' => 'required|numeric',
             'tunjangan' => 'nullable|numeric',
-            'potongan_cuti' => 'nullable|numeric',
         ]);
 
+        $karyawan = Karyawan::findOrFail($request->karyawan_id);
+        $bulan = $request->bulan;
+
+        // Default potongan
+        $potongan_cuti = 0;
+
+        try {
+            $bulanCarbon = Carbon::createFromFormat('Y-m', $bulan);
+
+            // Ambil cuti yang disetujui dalam bulan & tahun yang sama
+            $cutiDisetujui = $karyawan->cuti()
+                ->where('status', 'disetujui')
+                ->whereMonth('tanggal_mulai', $bulanCarbon->month)
+                ->whereYear('tanggal_mulai', $bulanCarbon->year)
+                ->get();
+
+            $jumlahHariCuti = $cutiDisetujui->sum(function ($cuti) {
+                return $cuti->tanggal_mulai->diffInDays($cuti->tanggal_selesai) + 1;
+            });
+
+            $potongan_cuti = $jumlahHariCuti * 100000;
+        } catch (\Exception $e) {
+            Log::error('Gagal parsing bulan: ' . $e->getMessage());
+        }
+
+        $cekDuplikat = Gaji::where('karyawan_id', $karyawan->id)
+            ->where('bulan', $bulan)
+            ->exists();
+
+        if ($cekDuplikat) {
+            return back()->withErrors(['bulan' => 'Gaji untuk bulan ini sudah ada.'])->withInput();
+        }
+
         Gaji::create([
-            'karyawan_id' => $request->karyawan_id,
-            'bulan' => $request->bulan,
+            'karyawan_id' => $karyawan->id,
+            'bulan' => $bulan,
             'gaji_pokok' => $request->gaji_pokok,
             'tunjangan' => $request->tunjangan ?? 0,
-            'potongan_cuti' => $request->potongan_cuti ?? 0,
+            'potongan_cuti' => $potongan_cuti,
         ]);
 
         return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil ditambahkan.');
@@ -56,18 +90,40 @@ class GajiController extends Controller
 
         $request->validate([
             'karyawan_id' => 'required|exists:karyawan,id',
-            'bulan' => 'required|string',
+            'bulan' => 'required|date_format:Y-m',
             'gaji_pokok' => 'required|numeric',
             'tunjangan' => 'nullable|numeric',
-            'potongan_cuti' => 'nullable|numeric',
         ]);
+
+        $karyawan = Karyawan::findOrFail($request->karyawan_id);
+        $bulan = $request->bulan;
+
+        $potongan_cuti = 0;
+
+        try {
+            $bulanCarbon = Carbon::createFromFormat('Y-m', $bulan);
+
+            $cutiDisetujui = $karyawan->cuti()
+                ->where('status', 'disetujui')
+                ->whereMonth('tanggal_mulai', $bulanCarbon->month)
+                ->whereYear('tanggal_mulai', $bulanCarbon->year)
+                ->get();
+
+            $jumlahHariCuti = $cutiDisetujui->sum(function ($cuti) {
+                return $cuti->tanggal_mulai->diffInDays($cuti->tanggal_selesai) + 1;
+            });
+
+            $potongan_cuti = $jumlahHariCuti * 100000;
+        } catch (\Exception $e) {
+            Log::error('Gagal parsing bulan: ' . $e->getMessage());
+        }
 
         $gaji->update([
             'karyawan_id' => $request->karyawan_id,
             'bulan' => $request->bulan,
             'gaji_pokok' => $request->gaji_pokok,
             'tunjangan' => $request->tunjangan ?? 0,
-            'potongan_cuti' => $request->potongan_cuti ?? 0,
+            'potongan_cuti' => $potongan_cuti,
         ]);
 
         return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil diperbarui.');
@@ -80,5 +136,4 @@ class GajiController extends Controller
 
         return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil dihapus.');
     }
-
 }

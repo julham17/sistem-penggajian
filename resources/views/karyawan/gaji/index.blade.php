@@ -24,7 +24,7 @@
                 @forelse($gaji as $index => $item)
                     <tr>
                         <td>{{ $gaji->firstItem() + $index }}</td>
-                        <td>{{ $item->bulan }}</td>
+                        <td>{{ $item->bulan_format }}</td>
                         <td>Rp {{ number_format($item->gaji_pokok, 0, ',', '.') }}</td>
                         <td>Rp {{ number_format($item->tunjangan, 0, ',', '.') }}</td>
                         <td>Rp {{ number_format($item->potongan_cuti, 0, ',', '.') }}</td>

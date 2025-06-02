@@ -22,7 +22,7 @@
 
         <div class="mb-3">
             <label for="bulan" class="form-label">Bulan</label>
-            <input type="text" name="bulan" class="form-control" value="{{ $gaji->bulan }}" required>
+            <input type="month" name="bulan" class="form-control" value="{{ $gaji->bulan }}" required>
         </div>
 
         <div class="mb-3">

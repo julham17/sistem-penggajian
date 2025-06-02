@@ -33,7 +33,7 @@
 
         <div class="mb-3">
             <label for="bulan" class="form-label">Bulan</label>
-            <input type="text" name="bulan" id="bulan" class="form-control" placeholder="Bulan Tahun" value="{{ old('bulan') }}" required>
+            <input type="month" name="bulan" id="bulan" class="form-control" placeholder="Bulan Tahun" value="{{ old('bulan', isset($gaji) ? $gaji->bulan : '') }}" required>
         </div>
 
         <div class="mb-3">

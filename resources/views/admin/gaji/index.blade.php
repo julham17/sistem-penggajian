@@ -28,11 +28,11 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $row->karyawan->nama_lengkap }}</td>
-                    <td>{{ $row->bulan }}</td>
+                    <td>{{ $row->bulan_format }}</td>
                     <td>Rp{{ number_format($row->gaji_pokok) }}</td>
                     <td>Rp{{ number_format($row->tunjangan) }}</td>
-                    <td>Rp{{ number_format($row->potongan_cuti) }}</td>
-                    <td><strong>Rp{{ number_format($row->total_bersih) }}</strong></td>
+                    <td>Rp{{ number_format($row->potongan_cuti, 0, ',', '.') }}</td>
+                    <td><strong>Rp{{ number_format($row->total_bersih, 0, ',', '.') }}</strong></td>
                     <td>
                         <a href="{{ route('gaji.edit', $row->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
@@ -42,7 +42,6 @@
                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                         </form>
                     </td>
-
                 </tr>
             @endforeach
         </tbody>
