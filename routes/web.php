@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\KaryawanController;
 use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\PembayaranGajiController;
 use App\Http\Controllers\Karyawan\GajiKaryawanController;
+use App\Http\Controllers\Karyawan\CutiController as KaryawanCutiController;
 
 Route::get('/', function () {
     return view('auth/login');
@@ -29,17 +30,17 @@ Route::middleware('auth')->group(function () {
         Route::resource('pembayaran', PembayaranGajiController::class);
     });
 
-    Route::middleware([RoleMiddleware::class . ':karyawan'])->group(function () {
-        Route::get('/karyawan/dashboard', function () {
+    Route::middleware([RoleMiddleware::class . ':karyawan'])
+    ->prefix('karyawan')
+    ->name('karyawan.')
+    ->group(function () {
+        Route::get('/dashboard', function () {
             return view('karyawan.dashboard');
-        })->name('karyawan.dashboard');
+        })->name('dashboard');
 
-        Route::get('/cuti/ajukan', function () {
-            return 'Halaman Ajukan Cuti (coming soon)';
-        })->name('cuti.ajukan');
+        Route::get('/gaji', [GajiKaryawanController::class, 'index'])->name('gaji.index');
 
-        Route::get('/gaji', [GajiKaryawanController::class, 'index'])->name('karyawan.gaji.index');
-
+        Route::resource('cuti', KaryawanCutiController::class);
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

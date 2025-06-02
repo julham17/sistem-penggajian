@@ -40,8 +40,8 @@
                                 href="{{ route('karyawan.gaji.index') }}">Slip Gaji</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('cuti.ajukan') ? 'active fw-semibold' : '' }}"
-                                href="{{ route('cuti.ajukan') }}">Ajukan Cuti</a>
+                        <a class="nav-link {{ request()->routeIs('karyawan.cuti.index') ? 'active fw-semibold' : '' }}"
+                                href="{{ route('karyawan.cuti.index') }}">Cuti</a>
                         </li>
                     @endif
                 @endauth
