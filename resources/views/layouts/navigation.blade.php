@@ -28,7 +28,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('cuti.index') ? 'active fw-semibold' : '' }}"
-                                href="#">Pengajuan Cuti</a>
+                                href="{{ route('cuti.index') }}">Cuti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('cuti.riwayat') ? 'active fw-semibold' : '' }}"
+                                href="{{ route('admin.cuti.riwayat') }}">Riwayat Cuti</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('laporan') ? 'active fw-semibold' : '' }}"

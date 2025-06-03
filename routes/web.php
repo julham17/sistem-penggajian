@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\KaryawanController;
 use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\PembayaranGajiController;
+use App\Http\Controllers\Admin\CutiController;
 use App\Http\Controllers\Karyawan\GajiKaryawanController;
 use App\Http\Controllers\Karyawan\CutiController as KaryawanCutiController;
 
@@ -25,6 +26,11 @@ Route::middleware('auth')->group(function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');
 
+        Route::get('/cuti', [CutiController::class, 'index'])->name('cuti.index');
+        Route::patch('/cuti/{id}/status', [CutiController::class, 'updateStatus'])->name('admin.cuti.updateStatus');
+        Route::get('/cuti/riwayat', [CutiController::class, 'riwayat'])->name('admin.cuti.riwayat');
+
+        // Route::resource('cuti', CutiController::class);
         Route::resource('gaji', GajiController::class);
         Route::resource('karyawan', KaryawanController::class);
         Route::resource('pembayaran', PembayaranGajiController::class);
