@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <h2>Tambah Data Karyawan</h2>
 
-    <form action="{{ route('karyawan.store') }}" method="POST">
+    <form action="{{ route('admin.karyawan.store') }}" method="POST">
         @csrf
 
         <!-- Form fields -->
@@ -62,7 +62,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('karyawan.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('admin.karyawan.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

@@ -4,7 +4,7 @@
 <div class="container">
     <h4>Edit Data Gaji</h4>
 
-    <form action="{{ route('gaji.update', $gaji->id) }}" method="POST">
+    <form action="{{ route('admin.gaji.update', $gaji->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -41,7 +41,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Perbarui</button>
-        <a href="{{ route('gaji.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('admin.gaji.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

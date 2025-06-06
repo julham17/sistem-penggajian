@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Data Karyawan</h3>
-        <a href="{{ route('karyawan.create') }}" class="btn btn-primary">+ Tambah Karyawan</a>
+        <a href="{{ route('admin.karyawan.create') }}" class="btn btn-primary">+ Tambah Karyawan</a>
     </div>
 
     @if(session('success'))
@@ -36,8 +36,8 @@
                         <td>{{ $item->nomor_telepon }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->tanggal_masuk)->format('d-m-Y') }}</td>
                         <td>
-                            <a href="{{ route('karyawan.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{ route('karyawan.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                            <a href="{{ route('admin.karyawan.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="{{ route('admin.karyawan.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger">Hapus</button>

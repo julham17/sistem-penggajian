@@ -96,7 +96,7 @@ class KaryawanController extends Controller
             'tanggal_masuk' => $request->tanggal_masuk,
         ]);
 
-        return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil diperbarui.');
+        return redirect()->route('admin.karyawan.index')->with('success', 'Data karyawan berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -105,6 +105,6 @@ class KaryawanController extends Controller
         $karyawan->user->delete(); // Hapus user terkait
         $karyawan->delete();
 
-        return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil dihapus.');
+        return redirect()->route('admin.karyawan.index')->with('success', 'Data karyawan berhasil dihapus.');
     }
 }

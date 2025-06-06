@@ -16,28 +16,25 @@
                     @if (Auth::user()->role === 'admin')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('karyawan.*') ? 'active fw-semibold' : '' }}"
-                                href="{{ route('karyawan.index') }}">Kelola Karyawan</a>
+                                href="{{ route('admin.karyawan.index') }}">Kelola Karyawan</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('gaji.*') ? 'active fw-semibold' : '' }}"
-                                href="{{ route('gaji.index') }}">Kelola Gaji</a>
+                                href="{{ route('admin.gaji.index') }}">Kelola Gaji</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('pembayaran.*') ? 'active fw-semibold' : '' }}"
-                                href="{{ route('pembayaran.index') }}">Pembayaran Gaji</a>
+                                href="{{ route('admin.pembayaran.index') }}">Pembayaran Gaji</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('cuti.index') ? 'active fw-semibold' : '' }}"
-                                href="{{ route('cuti.index') }}">Cuti</a>
+                                href="{{ route('admin.cuti.index') }}">Cuti</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('cuti.riwayat') ? 'active fw-semibold' : '' }}"
                                 href="{{ route('admin.cuti.riwayat') }}">Riwayat Cuti</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('laporan') ? 'active fw-semibold' : '' }}"
-                                href="#">Laporan</a>
-                        </li>
+
                     @elseif (Auth::user()->role === 'karyawan')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('karyawan.gaji.index') ? 'active fw-semibold' : '' }}"

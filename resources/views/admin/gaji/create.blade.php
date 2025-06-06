@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <h4>Tambah Data Gaji Karyawan</h4>
 
-    <a href="{{ route('gaji.index') }}" class="btn btn-secondary mb-3">← Kembali</a>
+    <a href="{{ route('admin.gaji.index') }}" class="btn btn-secondary mb-3">← Kembali</a>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <form action="{{ route('gaji.store') }}" method="POST">
+    <form action="{{ route('admin.gaji.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">

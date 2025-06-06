@@ -4,13 +4,13 @@
 <div class="container mt-4">
     <h4>Data Gaji Karyawan</h4>
 
-    <a href="{{ route('gaji.create') }}" class="btn btn-success mb-3">+ Tambah Gaji</a>
+    <a href="{{ route('admin.gaji.create') }}" class="btn btn-success mb-3">+ Tambah Gaji</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form method="GET" action="{{ route('gaji.index') }}" class="mb-3 row g-3 align-items-center">
+    <form method="GET" action="{{ route('admin.gaji.index') }}" class="mb-3 row g-3 align-items-center">
         <div class="col-auto">
             <label for="status_kelola" class="col-form-label">Filter Status:</label>
         </div>
@@ -59,9 +59,9 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('gaji.edit', $row->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{{ route('admin.gaji.edit', $row->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
-                        <form action="{{ route('gaji.destroy', $row->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                        <form action="{{ route('admin.gaji.destroy', $row->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

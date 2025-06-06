@@ -4,7 +4,7 @@
 <div class="container">
     <h4 class="mb-4">Edit Pembayaran Gaji</h4>
 
-    <form action="{{ route('pembayaran.update', $pembayaran->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.pembayaran.update', $pembayaran->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -38,7 +38,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('pembayaran.index') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('admin.pembayaran.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>
 @endsection

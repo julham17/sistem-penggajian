@@ -85,7 +85,7 @@ class GajiController extends Controller
             'potongan_cuti' => $potongan_cuti,
         ]);
 
-        return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil ditambahkan.');
+        return redirect()->route('admin.gaji.index')->with('success', 'Data gaji berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -138,7 +138,7 @@ class GajiController extends Controller
             'potongan_cuti' => $potongan_cuti,
         ]);
 
-        return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil diperbarui.');
+        return redirect()->route('admin.gaji.index')->with('success', 'Data gaji berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -146,6 +146,6 @@ class GajiController extends Controller
         $gaji = Gaji::findOrFail($id);
         $gaji->delete();
 
-        return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil dihapus.');
+        return redirect()->route('admin.gaji.index')->with('success', 'Data gaji berhasil dihapus.');
     }
 }

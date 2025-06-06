@@ -45,7 +45,7 @@ class PembayaranGajiController extends Controller
 
         Gaji::where('id', $request->gaji_id)->update(['status_kelola' => 'sudah_dibayar']);
 
-        return redirect()->route('pembayaran.index')->with('success', 'Data pembayaran berhasil ditambahkan.');
+        return redirect()->route('admin.pembayaran.index')->with('success', 'Data pembayaran berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -79,7 +79,7 @@ class PembayaranGajiController extends Controller
 
         $pembayaran->update($data);
 
-        return redirect()->route('pembayaran.index')->with('success', 'Data pembayaran berhasil diperbarui.');
+        return redirect()->route('admin.pembayaran.index')->with('success', 'Data pembayaran berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -93,6 +93,6 @@ class PembayaranGajiController extends Controller
 
         $pembayaran->delete();
 
-        return redirect()->route('pembayaran.index')->with('success', 'Data pembayaran berhasil dihapus.');
+        return redirect()->route('admin.pembayaran.index')->with('success', 'Data pembayaran berhasil dihapus.');
     }
 }

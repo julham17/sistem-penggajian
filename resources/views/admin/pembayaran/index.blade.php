@@ -4,7 +4,7 @@
 <div class="container">
     <h4 class="mb-4">Daftar Pembayaran Gaji</h4>
 
-    <a href="{{ route('pembayaran.create') }}" class="btn btn-primary mb-3">Tambah Pembayaran</a>
+    <a href="{{ route('admin.pembayaran.create') }}" class="btn btn-primary mb-3">Tambah Pembayaran</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -38,7 +38,8 @@
                         @endif
                     </td>
                     <td>
-                        <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?');">
+                        <a href="{{ route('admin.pembayaran.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <form action="{{ route('admin.pembayaran.destroy', $item->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus?');">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm">Hapus</button>
