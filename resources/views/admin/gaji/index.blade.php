@@ -42,26 +42,28 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($gaji as $row)
+            @foreach ($gaji as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $row->karyawan->nama_lengkap }}</td>
-                    <td>{{ $row->bulan_format }}</td>
-                    <td>Rp{{ number_format($row->gaji_pokok) }}</td>
-                    <td>Rp{{ number_format($row->tunjangan) }}</td>
-                    <td>Rp{{ number_format($row->potongan_cuti, 0, ',', '.') }}</td>
-                    <td><strong>Rp{{ number_format($row->total_bersih, 0, ',', '.') }}</strong></td>
+                    <td>{{ $item->karyawan->nama_lengkap }}</td>
+                    <td>{{ $item->bulan_format }}</td>
+                    <td>Rp{{ number_format($item->gaji_pokok) }}</td>
+                    <td>Rp{{ number_format($item->tunjangan) }}</td>
+                    <td>Rp{{ number_format($item->potongan_cuti, 0, ',', '.') }}</td>
+                    <td><strong>Rp{{ number_format($item->total_bersih, 0, ',', '.') }}</strong></td>
                     <td>
-                        @if($row->status_kelola === 'sudah_dibayar')
-                            <span class="badge bg-success">Sudah Dibayar</span>
+                        @if($item->status_kelola === 'sudah_dibayar')
+                            <span class="btn btn-sm btn-success">Sudah Dibayar</span>
                         @else
-                            <span class="badge bg-warning text-dark">Belum Dibayar</span>
+                            <a href="{{ route('admin.gaji.bayar', $item->id) }}" class="btn btn-sm btn-warning ">
+                                Bayar Sekarang
+                            </a>
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('admin.gaji.edit', $row->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{{ route('admin.gaji.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
-                        <form action="{{ route('admin.gaji.destroy', $row->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                        <form action="{{ route('admin.gaji.destroy', $item->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

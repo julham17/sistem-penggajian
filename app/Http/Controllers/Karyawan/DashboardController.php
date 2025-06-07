@@ -13,7 +13,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         if ($user->role === 'karyawan') {
-            return view('dashboard.karyawan', compact('user'));
+            return view('karyawan.dashboard', compact('user'));
         }
 
         abort(403, 'Unauthorized');

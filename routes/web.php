@@ -39,12 +39,18 @@ Route::middleware('auth')->group(function () {
     // ADMIN
     Route::middleware([RoleMiddleware::class . ':admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/chart/gaji', [AdminDashboardController::class, 'chartGaji']);
 
         Route::get('/cuti', [CutiController::class, 'index'])->name('cuti.index');
         Route::patch('/cuti/{id}/status', [CutiController::class, 'updateStatus'])->name('cuti.updateStatus');
         Route::get('/cuti/riwayat', [CutiController::class, 'riwayat'])->name('cuti.riwayat');
 
-        Route::resource('gaji', GajiController::class);
+        Route::get('/gaji/{id}/bayar', [PembayaranGajiController::class, 'formPembayaran'])->name('gaji.bayar');
+        Route::post('/gaji/{id}/bayar', [PembayaranGajiController::class, 'prosesPembayaran'])->name('gaji.bayar.store');
+
+        Route::get('/pembayaran/{id}/slip', [PembayaranGajiController::class, 'slipGaji'])->name('pembayaran.slip');
+
+        Route::resource('gaji', GajiController::class)->except(['show']);
         Route::resource('karyawan', KaryawanController::class);
         Route::resource('pembayaran', PembayaranGajiController::class);
     });

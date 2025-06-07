@@ -33,7 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     {{-- Script dari setiap halaman --}}
-    @yield('scripts')
+    @stack('scripts')
 
 </body>
 </html>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\PembayaranGaji;
 use App\Models\Gaji;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class PembayaranGajiController extends Controller
 {
@@ -95,4 +96,53 @@ class PembayaranGajiController extends Controller
 
         return redirect()->route('admin.pembayaran.index')->with('success', 'Data pembayaran berhasil dihapus.');
     }
+
+    public function slipGaji($id)
+    {
+        $pembayaran = PembayaranGaji::with('gaji.karyawan')->findOrFail($id);
+        $gaji = $pembayaran->gaji;
+
+        $pdf = PDF::loadView('admin.pembayaran.slip', compact('gaji'));
+        return $pdf->stream('slip-gaji-' . $gaji->karyawan->nama_lengkap . '-' . $gaji->bulan->format('F-Y') . '.pdf');
+    }
+
+    // Menampilkan form pembayaran
+    public function formPembayaran($id)
+    {
+        $gaji = Gaji::with('karyawan')->findOrFail($id);
+        return view('admin.pembayaran.form', compact('gaji'));
+    }
+
+    // Memproses penyimpanan pembayaran
+    public function prosesPembayaran(Request $request, $id)
+    {
+        $request->validate([
+            'tanggal_pembayaran' => 'required|date',
+            'metode_pembayaran' => 'required|string',
+            'bukti_pembayaran' => 'nullable|image|max:2048',
+        ]);
+
+        $gaji = Gaji::findOrFail($id);
+
+        // Upload bukti pembayaran jika ada
+        $buktiPath = null;
+        if ($request->hasFile('bukti_pembayaran')) {
+            $buktiPath = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
+        }
+
+        // Simpan pembayaran
+        PembayaranGaji::create([
+            'gaji_id' => $gaji->id,
+            'tanggal_pembayaran' => $request->tanggal_pembayaran,
+            'metode_pembayaran' => $request->metode_pembayaran,
+            'bukti_pembayaran' => $buktiPath,
+        ]);
+
+        // Update status gaji
+        $gaji->status_kelola = 'sudah_dibayar';
+        $gaji->save();
+
+        return redirect()->route('admin.gaji.index')->with('success', 'Pembayaran berhasil disimpan.');
+    }
+
 }

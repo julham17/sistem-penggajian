@@ -35,11 +35,11 @@
                             <td>{{ $cuti->created_at->translatedFormat('d F Y') }}</td>
                             <td>
                                 @if ($cuti->status === 'pending')
-                                    <span class="badge bg-warning text-dark">Pending</span>
+                                    <span class="btn btn-sm btn-primary">Pending</span>
                                 @elseif ($cuti->status === 'disetujui')
-                                    <span class="badge bg-success">Disetujui</span>
+                                    <span class="btn btn-sm btn-success">Disetujui</span>
                                 @else
-                                    <span class="badge bg-danger">Ditolak</span>
+                                    <span class="btn btn-sm btn-danger">Ditolak</span>
                                 @endif
                             </td>
                         </tr>

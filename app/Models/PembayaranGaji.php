@@ -22,4 +22,9 @@ class PembayaranGaji extends Model
     {
         return $this->belongsTo(Gaji::class);
     }
+
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class);
+    }
 }

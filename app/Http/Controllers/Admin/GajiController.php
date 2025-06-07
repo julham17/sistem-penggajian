@@ -61,8 +61,8 @@ class GajiController extends Controller
 
             $potongan_cuti = $jumlahHariCuti * 100000;
             
-            Log::info('Jumlah hari cuti disetujui:', ['jumlah_hari_cuti' => $jumlahHariCuti]);
-            Log::info('Potongan cuti:', ['potongan' => $potongan_cuti]);
+            // Log::info('Jumlah hari cuti disetujui:', ['jumlah_hari_cuti' => $jumlahHariCuti]);
+            // Log::info('Potongan cuti:', ['potongan' => $potongan_cuti]);
             
             
         } catch (\Exception $e) {
@@ -91,7 +91,7 @@ class GajiController extends Controller
     public function edit($id)
     {
         $gaji = Gaji::findOrFail($id);
-        $karyawan = \App\Models\Karyawan::all();
+        $karyawan = Karyawan::all();
 
         return view('admin.gaji.edit', compact('gaji', 'karyawan'));
     }

@@ -4,8 +4,6 @@
 <div class="container">
     <h4 class="mb-4">Daftar Pembayaran Gaji</h4>
 
-    <a href="{{ route('admin.pembayaran.create') }}" class="btn btn-primary mb-3">Tambah Pembayaran</a>
-
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -19,6 +17,7 @@
                 <th>Metode</th>
                 <th>Tanggal</th>
                 <th>Bukti</th>
+                <th>Slip</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -32,10 +31,15 @@
                     <td>{{ \Carbon\Carbon::parse($item->tanggal_pembayaran)->translatedFormat('d F Y') }}</td>
                     <td>
                         @if($item->bukti_pembayaran)
-                            <a href="{{ asset('storage/'.$item->bukti_pembayaran) }}" target="_blank">Lihat</a>
+                            <a href="{{ asset('storage/'.$item->bukti_pembayaran) }}" class="btn btn-sm btn-success" target="_blank">Lihat</a>
                         @else
                             -
                         @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.pembayaran.slip', $item->id) }}" class="btn btn-sm btn-primary" target="_blank">
+                            Slip Gaji
+                        </a>
                     </td>
                     <td>
                         <a href="{{ route('admin.pembayaran.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
