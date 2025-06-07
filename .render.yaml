@@ -1,0 +1,73 @@
+services:
+  - type: web
+    name: sistem-penggajian
+    env: php
+    plan: free
+    region: singapore
+
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan key:generate
+      php artisan migrate --force
+      php artisan storage:link
+
+    startCommand: php artisan serve --host 0.0.0.0 --port 10000
+
+    envVars:
+      - key: APP_NAME
+        value: Laravel
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://sistem-penggajian.onrender.com
+
+      - key: LOG_CHANNEL
+        value: stack
+      - key: LOG_LEVEL
+        value: warning
+
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: centerbeam.proxy.rlwy.net
+      - key: DB_PORT
+        value: 14884
+      - key: DB_DATABASE
+        value: railway
+      - key: DB_USERNAME
+        value: root
+      - key: DB_PASSWORD
+        value: RcvMLkUoVKqVjzWsTfoSytcZrYDGdAHk
+
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_LIFETIME
+        value: 120
+      - key: SESSION_ENCRYPT
+        value: false
+      - key: SESSION_PATH
+        value: /
+      - key: SESSION_DOMAIN
+        value: null
+
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: CACHE_STORE
+        value: database
+
+      - key: FILESYSTEM_DISK
+        value: local
+
+      - key: MAIL_MAILER
+        value: log
+      - key: MAIL_FROM_ADDRESS
+        value: leptopjanz@gmail.com
+      - key: MAIL_FROM_NAME
+        value: Laravel
+
+      - key: AWS_DEFAULT_REGION
+        value: us-east-1
+      - key: AWS_USE_PATH_STYLE_ENDPOINT
+        value: false
