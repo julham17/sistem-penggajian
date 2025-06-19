@@ -1,8 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Form Pembayaran Gaji</h2>
+<div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Form Pembayaran Gaji</h1>
+        </div>
+
     <p><strong>Nama Karyawan:</strong> {{ $gaji->karyawan->nama_lengkap }}</p>
     <p><strong>Bulan:</strong> {{ \Carbon\Carbon::parse($gaji->bulan)->translatedFormat('F Y') }}</p>
 

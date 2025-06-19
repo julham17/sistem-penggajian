@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h4 class="mb-4">Riwayat Pengajuan Cuti</h4>
+<div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Riwayat Pengajuan Cuti</h1>
+        </div>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -11,9 +15,11 @@
     @if ($riwayatCuti->isEmpty())
         <div class="alert alert-info">Belum ada riwayat cuti.</div>
     @else
+
+    <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered align-middle">
-                <thead class="table-light">
+            <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama Karyawan</th>
@@ -47,6 +53,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
     @endif
 </div>
 @endsection

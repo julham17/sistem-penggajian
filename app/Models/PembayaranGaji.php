@@ -14,8 +14,11 @@ class PembayaranGaji extends Model
     protected $fillable = [
         'gaji_id',
         'metode_pembayaran',
-        'tanggal_pembayaran',
         'bukti_pembayaran',
+    ];
+
+    protected $casts = [
+        'tanggal_pembayaran' => 'date',
     ];
 
     public function gaji()

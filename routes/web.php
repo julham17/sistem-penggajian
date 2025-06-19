@@ -60,6 +60,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [KaryawanDashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/gaji', [GajiKaryawanController::class, 'index'])->name('gaji.index');
+        Route::get('/gaji/{id}/slip', [GajiKaryawanController::class, 'slipGaji'])->name('gaji.slip');
+
+
         Route::resource('cuti', KaryawanCutiController::class);
     });
 

@@ -13,7 +13,7 @@ class PembayaranGajiController extends Controller
 {
     public function index()
     {
-        $pembayaran = PembayaranGaji::with('gaji.karyawan')->latest()->paginate(10);
+        $pembayaran = PembayaranGaji::with('gaji.karyawan')->latest()->get();
         return view('admin.pembayaran.index', compact('pembayaran'));
     }
 

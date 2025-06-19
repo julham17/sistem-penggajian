@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h4>Edit Data Gaji</h4>
+<div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Edit Gaji</h1>
+        </div>
 
     <form action="{{ route('admin.gaji.update', $gaji->id) }}" method="POST">
         @csrf

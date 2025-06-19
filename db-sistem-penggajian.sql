@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2025 at 08:14 AM
+-- Generation Time: Jun 07, 2025 at 05:54 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -112,7 +112,8 @@ CREATE TABLE `gaji` (
 INSERT INTO `gaji` (`id`, `karyawan_id`, `bulan`, `gaji_pokok`, `tunjangan`, `potongan_cuti`, `status_kelola`, `created_at`, `updated_at`) VALUES
 (3, 3, '2025-05-01', 3200000, 300000, 0, 'sudah_dibayar', '2025-06-02 14:35:45', '2025-06-02 17:07:26'),
 (4, 1, '2025-06-01', 4000000, 500000, 200000, 'belum_dibayar', '2025-06-02 16:52:02', '2025-06-02 16:52:02'),
-(6, 2, '2025-06-01', 3000000, 100000, 400000, 'belum_dibayar', '2025-06-02 17:08:34', '2025-06-02 17:08:34');
+(6, 2, '2025-06-01', 3000000, 200000, 400000, 'sudah_dibayar', '2025-06-02 17:08:34', '2025-06-06 09:22:39'),
+(8, 15, '2025-05-01', 3000000, 200000, 0, 'sudah_dibayar', '2025-06-06 10:50:43', '2025-06-06 10:51:24');
 
 -- --------------------------------------------------------
 
@@ -255,7 +256,9 @@ CREATE TABLE `pembayaran_gaji` (
 --
 
 INSERT INTO `pembayaran_gaji` (`id`, `gaji_id`, `tanggal_pembayaran`, `metode_pembayaran`, `bukti_pembayaran`, `created_at`, `updated_at`) VALUES
-(3, 3, '2025-06-03', 'Transfer', 'bukti_pembayaran/rA9FT1K5OosRzWbh1chQo3wEs42umCx5qNcaeLfq.jpg', '2025-06-02 17:07:26', '2025-06-02 17:07:26');
+(3, 3, '2025-06-03', 'Transfer', 'bukti_pembayaran/rA9FT1K5OosRzWbh1chQo3wEs42umCx5qNcaeLfq.jpg', '2025-06-02 17:07:26', '2025-06-02 17:07:26'),
+(4, 6, '2025-06-01', 'Transfer', 'bukti_pembayaran/9L3N37TITtd1vOFknZNn6X5wA2dqw4Kjt8ajlqFm.jpg', '2025-06-06 09:22:39', '2025-06-06 09:22:39'),
+(5, 8, '2025-06-01', 'Transfer', 'bukti_pembayaran/ffyGlNosoZBTwaaBQ0LHwoUcXDjqMFv3MxkscgUW.jpg', '2025-06-06 10:51:24', '2025-06-06 10:51:24');
 
 -- --------------------------------------------------------
 
@@ -277,10 +280,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('7Rrf7H8uZf69MgTlXsECqJboi22yFL9udjwK6ONF', 22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiN1cwS2JkRU4yVER0U3VHckdKRU5KYVZMbU9oNDNBR1NKaEcwSm5hRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9jdXRpL3Jpd2F5YXQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyMjt9', 1748927636),
-('96IjWEU7h3SRP0AoJY7OF8nX9iDsnMqbbRFp5mWn', 22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQ0dna01FMHZQTndCNVVETWY1Vko0SHZScG9XbnJSdThTWnB0OVdKOSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9nYWppIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjI7fQ==', 1748917355),
-('plH9lziq6cYdWWxHkZqhJEl1CFrCWqnsN4qENGFj', 22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMFhTbjRYYnFPMU1USTZES1EyUk1Kd0hYR2JsVFhZQnhHMGxQc2hERyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2FkbWluL3BlbWJheWFyYW4iO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjI7fQ==', 1748917312),
-('SVRTc8RIonzuKrjEd6fvsykGdUD3gBRKFeocBTLx', 22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiV1NhTDg0dUhrUmZtUmdPTjV1bzBqRDIwVlZibW00QVQxbVNIMFh1VyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9nYWppIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjI7fQ==', 1748909314);
+('a4O6YDJb6ntnPW7GlrCXwCUU4eIJfhc2J0HNc79M', 22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicWRxWDIzaUxxdlhLNmFrRVJYdUJDTUVjb1JNa01FRlpFS2dOOEU2TyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9jdXRpL3Jpd2F5YXQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyMjt9', 1749311623),
+('rUk0jPqKfU8y0FZJtE604FcnvWnIiPRNZBfI640B', 22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVTBKdmdGd3k1c2FSVlBPMnJrejBuWjdmdU1YQjRRdXJLb3Nuc1VqaCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyMjt9', 1749236026);
 
 -- --------------------------------------------------------
 
@@ -438,7 +439,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `gaji`
 --
 ALTER TABLE `gaji`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -450,7 +451,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -462,13 +463,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pembayaran_gaji`
 --
 ALTER TABLE `pembayaran_gaji`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables

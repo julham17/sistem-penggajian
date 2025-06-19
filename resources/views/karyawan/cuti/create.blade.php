@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h4 class="mb-4">Ajukan Cuti</h4>
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Ajukan Cuti</h1>
+    </div>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>

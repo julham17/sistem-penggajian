@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h4 class="mb-4">Edit Pembayaran Gaji</h4>
+<div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Ubah Pembayaran</h1>
+        </div>
 
     <form action="{{ route('admin.pembayaran.update', $pembayaran->id) }}" method="POST" enctype="multipart/form-data">
         @csrf

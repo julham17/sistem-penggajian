@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
-    <h4>Tambah Data Gaji Karyawan</h4>
+<div class="container-fluid">
 
-    <a href="{{ route('admin.gaji.index') }}" class="btn btn-secondary mb-3">← Kembali</a>
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Tambah Data Gaji Karyawan</h1>
+        </div>
 
     @if ($errors->any())
         <div class="alert alert-danger">

@@ -45,7 +45,7 @@ class Gaji extends Model
     {
         try {
             return $this->bulan->translatedFormat('F Y');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->bulan;
         }
     }

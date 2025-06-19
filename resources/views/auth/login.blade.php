@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="container mt-5">
+
+<div class="container" style="margin-top: 250px;">
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card shadow rounded">
@@ -49,4 +50,7 @@
         </div>
     </div>
 </div>
+
+
+
 @endsection

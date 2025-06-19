@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Gaji;
-use App\Models\Karyawan;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Models\Gaji;
+use App\Models\Karyawan;
 
 class GajiController extends Controller
 {

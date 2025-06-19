@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Karyawan;
+use App\Models\Gaji;
 use App\Models\User;
 
 class KaryawanController extends Controller
 {
     public function index()
     {
-        $karyawan = Karyawan::with('user')->paginate(10);
+        $karyawan = Karyawan::with('user')->latest()->get();
         return view('admin.karyawan.index', compact('karyawan'));
     }
 
@@ -102,7 +103,7 @@ class KaryawanController extends Controller
     public function destroy($id)
     {
         $karyawan = Karyawan::findOrFail($id);
-        $karyawan->user->delete(); // Hapus user terkait
+        $karyawan->user->delete();
         $karyawan->delete();
 
         return redirect()->route('admin.karyawan.index')->with('success', 'Data karyawan berhasil dihapus.');
